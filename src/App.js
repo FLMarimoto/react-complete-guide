@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 
@@ -44,7 +44,8 @@ class App extends Component {
   }
   
   render() {
-    const classes = [];
+    const assignedClasses = [];
+    const btnClass = [classes.Button];
     
     let persons = null;
 
@@ -61,22 +62,23 @@ class App extends Component {
           })}
         </div>
       );
+      btnClass.push(classes.Red);
     }
 
     if(this.state.persons.length < 3) {
-      classes.push('red')
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length < 2) {
-      classes.push('bold')
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
+        <button onClick={this.togglePersonsHandler} className={btnClass.join(' ')}>
           Toggle Persons
-        </StyledButton>
+        </button>
         {persons}
       </div>
     );
