@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 import './App.css';
 import Person from './Person/Person';
 
-const StyledButton = styled.button`
-  background-color: green;
-  color: white; 
-  font: inherit;
-  border: 1px solid black ;
-  padding: 8px; 
-  cursor: pointer;
-  
-  &:hover {
-    background-color: lightgreen; 
-    color: black;
-  }
-`;
 
 class App extends Component {
   state = {
@@ -75,11 +61,6 @@ class App extends Component {
           })}
         </div>
       );
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
     }
 
     if(this.state.persons.length < 3) {
@@ -93,7 +74,7 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p className={classes.join(' ')}>This is really working!</p>
-        <StyledButton onClick={this.togglePersonsHandler}>
+        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </StyledButton>
         {persons}
