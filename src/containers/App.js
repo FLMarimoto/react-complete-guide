@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import classes from './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -30,12 +31,10 @@ class App extends Component {
 
     this.setState({persons: persons}); 
   }
-
   togglePersonsHandler = () => {
       const doesShow = this.state.showPersons;
       this.setState({showPersons: !doesShow});
   }
-
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons.slice()];
@@ -44,45 +43,25 @@ class App extends Component {
   }
   
   render() {
-    const assignedClasses = [];
-    const btnClass = [classes.Button];
     
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              click = {() => this.deletePersonHandler(index)}
-              changed = {(event) => this.nameChangedHandler(event, person.id)}
-              name = { person.name } 
-              age = { person.age }
-              key = { person.id }/>
-          })}
-        </div>
-      );
-      btnClass.push(classes.Red);
-    }
-
-    if(this.state.persons.length < 3) {
-      assignedClasses.push(classes.red);
-    }
-    if(this.state.persons.length < 2) {
-      assignedClasses.push(classes.bold);
+      persons = <Persons 
+        persons = {this.state.persons} 
+        clicked = {this.deletePersonHandler} 
+        changed = {this.nameChangedHandler}/>
     }
 
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!</p>
-        <button onClick={this.togglePersonsHandler} className={btnClass.join(' ')}>
-          Toggle Persons
-        </button>
+        <Cockpit 
+          clicked = {this.togglePersonsHandler}
+          showPersons = {this.state.showPersons}
+          persons = {this.state.persons}/>
         {persons}
       </div>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work??'));
   }
 }
 export default App;
