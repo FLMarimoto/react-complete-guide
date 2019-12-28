@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classes from './Cockpit.css';
 
@@ -6,6 +6,10 @@ const cockpit = (props) => {
     const assignedClasses = [];
     let btnClass = '';
     
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect')
+    });
+
     if(props.showPersons) {
         btnClass = classes.Red;
     }
